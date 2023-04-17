@@ -29,7 +29,7 @@ public class AppMethode {
         EntityManager em = entityManagerFactory.createEntityManager();
 
         // CODE
-        em.find();
+        //em.find();
 
         EntityTransaction et = em.getTransaction();
         et.begin();
