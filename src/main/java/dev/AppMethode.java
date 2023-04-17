@@ -1,6 +1,5 @@
 package dev;
 
-import dev.domain.Adresse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
