@@ -14,7 +14,7 @@
             <property name="jakarta.persistence.jdbc.user" value="root"/>
             <property name="jakarta.persistence.jdbc.password" value="root"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
-            <!-- C'est la crée automatiquement les tables mais, les détruit avant de les recrées"-->
+            <!-- C'est la crée automatiquement les tables mais, les détruit avant de les recréer"-->
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
