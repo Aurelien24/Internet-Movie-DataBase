@@ -38,5 +38,5 @@ build/
 ### Mac OS ###
 .DS_Store
 
-### Resource.xml ###
-src/main/resources/META-INF/persistence.xml
+#Ignore META-INF
+META-INF
