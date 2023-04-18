@@ -4,29 +4,29 @@ import jakarta.persistence.*;
 
 @Entity
 @Table (name = "LANGUES")
-public class Langues {
+public class Langue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idL;
+    private Integer id;
 
     @Column(name = "LIBELLE")
     private String libL;
 
 
-    public Langues() {
+    public Langue() {
     }
 
-    public Langues(Integer idL, String libL) {
-        this.idL = idL;
+    public Langue(Integer id, String libL) {
+        this.id = id;
         this.libL = libL;
     }
 
-    public Integer getIdL() {
-        return idL;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdL(Integer idL) {
-        this.idL = idL;
+    public void setId(Integer idL) {
+        this.id = idL;
     }
 
     public String getLibL() {
@@ -40,7 +40,7 @@ public class Langues {
     @Override
     public String toString() {
         return "Langue{" +
-                "idL=" + idL +
+                "idL=" + id +
                 ", libL='" + libL + '\'' +
                 '}';
     }

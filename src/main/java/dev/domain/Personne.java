@@ -4,10 +4,11 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "PERSONNE")
-public class Personnes {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Personne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPers;
+    private Integer id;
     @Column(name = "NOM")
     private String nom;
     @Column(name = "PRENOM")
@@ -15,22 +16,25 @@ public class Personnes {
     @Column(name = "URL")
     private String url;
 
-    public Personnes() {
+    public Personne() {
     }
 
-    public Personnes(Integer idPers, String nom, String prenom, String url) {
-        this.idPers = idPers;
+    public Personne(String nom, String prenom, String url) {
+    }
+
+    public Personne(Integer id, String nom, String prenom, String url) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.url = url;
     }
 
     public Integer getId() {
-        return idPers;
+        return id;
     }
 
     public void setId(Integer id) {
-        this.idPers = idPers;
+        this.id = this.id;
     }
 
     public String getNom() {
@@ -60,7 +64,7 @@ public class Personnes {
     @Override
     public String toString() {
         return "Personne{" +
-                "idPers=" + idPers +
+                "idPers=" + id +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", url='" + url + '\'' +
