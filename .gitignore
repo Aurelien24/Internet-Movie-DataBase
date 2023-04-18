@@ -39,4 +39,4 @@ build/
 .DS_Store
 
 #Ignore META-INF
-META-INF
+*/META-INF/*
