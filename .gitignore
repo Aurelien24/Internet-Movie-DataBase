@@ -12,7 +12,6 @@ target/
 *.iws
 *.iml
 *.ipr
-!**/src/main/resources/META-INF/persistence.xml
 
 ### Eclipse ###
 .apt_generated
@@ -40,4 +39,4 @@ build/
 .DS_Store
 
 ### Resource.xml ###
-
+./src/main/resources/META-INF/persistence.xml
