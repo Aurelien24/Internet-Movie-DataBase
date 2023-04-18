@@ -39,4 +39,4 @@ build/
 .DS_Store
 
 ### Resource.xml ###
-./src/main/resources/META-INF/persistence.xml
+src/main/resources/META-INF/persistence.xml
