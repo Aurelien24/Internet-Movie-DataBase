@@ -2,6 +2,10 @@ package dev.domain;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "ADRESSE")
 
@@ -15,6 +19,20 @@ public class Adresse {
     private String etat;
     @Column(name = "PAYS")
     private String pays;
+
+
+
+
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "adresse")
+    private List<Acteur> acteur = new ArrayList<>();
+
+
+
+
+
+
+
 
 
     public Adresse() {
