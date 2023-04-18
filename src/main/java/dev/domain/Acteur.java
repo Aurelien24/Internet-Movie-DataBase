@@ -6,31 +6,25 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ACTEURS")
-public class Acteurs extends Personnes {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idAct;
+public class Acteur extends Personne {
 
     @Column (name = "dateNaiss")
     private Date dateNaiss;
 
-    public Acteurs() {
+    public Acteur() {
     }
 
-    public Acteurs(Integer id, String nom, String prenom, String url, Integer idAct, Date dateNaiss) {
-        super(id, nom, prenom, url);
-        this.idAct = idAct;
+    public Acteur(Date dateNaiss) {
         this.dateNaiss = dateNaiss;
     }
 
-    @Override
-    public Integer getId() {
-        return idAct;
+    public Acteur(Integer idPers, String nom, String prenom, String url) {
+        super(idPers, nom, prenom, url);
     }
 
-    @Override
-    public void setId(Integer idAct) {
-        this.idAct = idAct;
+    public Acteur(String nom, String prenom, String url, Integer idAct, Date dateNaiss) {
+        super(nom, prenom, url);
+        this.dateNaiss = dateNaiss;
     }
 
     public Date getDateNaiss() {
@@ -44,7 +38,6 @@ public class Acteurs extends Personnes {
     @Override
     public String toString() {
         return "Acteur{" +
-                "idAct=" + idAct +
                 ", dateNaiss=" + dateNaiss +
                 '}';
     }

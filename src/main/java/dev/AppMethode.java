@@ -1,7 +1,6 @@
 package dev;
 
-import dev.domain.Acteurs;
-import dev.domain.Langues;
+import dev.domain.Langue;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -9,12 +8,13 @@ import jakarta.persistence.Persistence;
 
 public class AppMethode {
     public void cree_langue(String langue){
+        System.out.println("Cree langue en cour !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
         //code
-        Langues langueObjet = new Langues();
+        Langue langueObjet = new Langue();
         langueObjet.setLibL(langue);
 
         EntityTransaction et = em.getTransaction();
@@ -43,7 +43,7 @@ public class AppMethode {
         EntityManager em = entityManagerFactory.createEntityManager();
 
         // CODE
-        //em.find(Films.class, ID) -> Comment le faire avec le nom et non avec l'id? Comment obtenir l'id ?
+        //em.find(Film.class, ID) -> Comment le faire avec le nom et non avec l'id? Comment obtenir l'id ?
         // Prendre tout les
 
         EntityTransaction et = em.getTransaction();

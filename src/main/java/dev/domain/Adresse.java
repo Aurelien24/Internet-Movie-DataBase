@@ -5,10 +5,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "ADRESSE")
 
-public class Adresses {
+public class Adresse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idAdr;
+    private Integer id;
     @Column(name = "VILLE")
     private String ville;
     @Column(name = "ETAT")
@@ -17,22 +17,22 @@ public class Adresses {
     private String pays;
 
 
-    public Adresses() {
+    public Adresse() {
     }
 
-    public Adresses(Integer idAdr, String ville, String etat, String pays) {
-        this.idAdr = idAdr;
+    public Adresse(Integer idAdr, String ville, String etat, String pays) {
+        this.id = idAdr;
         this.ville = ville;
         this.etat = etat;
         this.pays = pays;
     }
 
     public Integer getId() {
-        return idAdr;
+        return id;
     }
 
     public void setId(Integer idAdr) {
-        this.idAdr = idAdr;
+        this.id = idAdr;
     }
 
     public String getVille() {
@@ -62,7 +62,7 @@ public class Adresses {
     @Override
     public String toString() {
         return "Adresse{" +
-                "idAdr=" + idAdr +
+                "idAdr=" + id +
                 ", ville='" + ville + '\'' +
                 ", etat='" + etat + '\'' +
                 ", pays='" + pays + '\'' +

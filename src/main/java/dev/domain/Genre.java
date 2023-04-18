@@ -4,19 +4,19 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "GENRES")
-public class Genres {
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "LIBELLE")
-    private String libG;
+    private String lib;
 
-    public Genres() {
+    public Genre() {
     }
 
-    public Genres(Integer id, String libG) {
+    public Genre(Integer id, String lib) {
         this.id = id;
-        this.libG = libG;
+        this.lib = lib;
     }
 
     public Integer getId() {
@@ -27,11 +27,11 @@ public class Genres {
         this.id = id;
     }
 
-    public String getLibG() {
-        return libG;
+    public String getLib() {
+        return lib;
     }
 
-    public void setLibG(String libG) {
-        this.libG = libG;
+    public void setLib(String libG) {
+        this.lib = libG;
     }
 }
