@@ -17,7 +17,7 @@ public class JsonMethode {
         EntityManager em = entityManagerFactory.createEntityManager();
 
         Film film = new Film();
-        Nationnalite nationnalite1 = new Nationnalite();
+        //Nationnalite nationnalite1 = new Nationnalite();
         film.setId(id);
         nationnalite.setId(id);
         film.setNom(nom);
@@ -32,14 +32,13 @@ public class JsonMethode {
         em.close();
     }
 
-    public void addLangue(Integer id, String libelle){
+    public void addLangue(String libelle){
         System.out.println("Ajout de langue !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
         Langue langue = new Langue();
-        langue.setId(id);
         langue.setLibL(libelle);
 
         EntityTransaction et = em.getTransaction();
@@ -86,21 +85,20 @@ public class JsonMethode {
         em.close();
     }
 
-    public void addActeur(Personne personne, Date dateNaiss, Adresse adresse){
+    public void addActeur(Acteur personne, Date dateNaiss, Adresse adresse){
         System.out.println("Ajout d'une personne !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        Acteur acteur = new Acteur();
-        /*acteur.setId(id);
-        acteur.setNom(nom);
-        acteur.setPrenom(prenom);
-        acteur.setUrl(url);*/
+        //Acteur acteur = new Acteur();
+       // acteur.set;
+        //acteur.setPrenom(prenom);
+        //acteur.setUrl(url);
 
         EntityTransaction et = em.getTransaction();
         et.begin();
-        em.persist(acteur);
+        em.persist(personne);
         et.commit();
         em.close();
     }

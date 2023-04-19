@@ -3,18 +3,11 @@ package dev;
 
 import dev.domain.Acteur;
 import dev.domain.Adresse;
-import dev.domain.Langue;
 import dev.domain.Personne;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
-import static java.lang.Character.highSurrogate;
 
 
 public class AddFileJson {
@@ -139,9 +132,7 @@ public class AddFileJson {
                 int max = line.length() -1;
                 langueFilm = line.substring(11, max);
 
-                // TODO ICI ARRENGEMENT A FAIRE §§
-
-                //JsonMethode.addLangue(langueFilm);
+                jsonMethode.addLangue(langueFilm);
             }
 
 
@@ -177,9 +168,7 @@ public class AddFileJson {
             if (line.contains("},") && derniereLigne.contains("pays : ")){
                 newLieuTournage = false;
 
-                // TODO ICI ARRENGEMENT A FAIRE §§
-
-                //jsonMethode.addLieu(paysTournage, etasTournage, villeTournage);
+                jsonMethode.addAdresse(villeTournage, etasTournage, paysTournage);
             }
 
             // boolean newRealisateur = false;
@@ -220,6 +209,7 @@ public class AddFileJson {
 
                 // TODO ICI ARRENGEMENT A FAIRE §§
                 // jsonMethode.addPersonne(nomRealisateur, prenomRealisateur, urlRealisateur);
+
             }
 
             //boolean newActeur = false;
@@ -310,7 +300,6 @@ public class AddFileJson {
                     paysNaissanceActeur = identiteSplits[1];
                 }
 
-                // TODO ICI ARRENGEMENT A FAIRE §§
                 jsonMethode.addAdresse(villeNaissanceActeur, regionNaissanceActeur, paysNaissanceActeur);
             }
 
@@ -331,9 +320,9 @@ public class AddFileJson {
                 newActeur = false;
 
                 // TODO ICI ARRENGEMENT A FAIRE §§
-                Personne personne = new Acteur(nomActeur, prenomActeur, urlActeur);
+                Acteur acteur = new Acteur(nomActeur, prenomActeur, urlActeur);
                 Adresse adresse = new Adresse(villeNaissanceActeur, regionNaissanceActeur, paysNaissanceActeur);
-                jsonMethode.addActeur(personne, dateNaissanceActeur, adresse);
+                jsonMethode.addActeur(acteur, dateNaissanceActeur, adresse);
             }
 
             // anneeSortieFilm = null;
@@ -388,7 +377,7 @@ public class AddFileJson {
         System.out.println("idActeur = " + idActeur);
         System.out.println("nom acteur = " + nomActeur);
         System.out.println("prenom acteur = " + prenomActeur);
-        //System.out.println("date naissence acteur = " + dateNaissanceActeur);
+        System.out.println("date naissence acteur = " + dateNaissanceActeur);
         System.out.println("ville naissance acteur = " + villeNaissanceActeur);
         System.out.println("région naissance acteur = " + regionNaissanceActeur);
         System.out.println("pays naissance acteur = " + paysNaissanceActeur);
