@@ -9,14 +9,16 @@ import jakarta.persistence.Persistence;
 import java.util.Date;
 
 public class JsonMethode {
-    public void addFilm(Integer id, String nom, String annee, String url, String desc){
+    public void addFilm(Integer id, Nationnalite nationnalite, String nom, String annee, String url, String desc){
         System.out.println("Ajout de film en cours !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
         Film film = new Film();
+        Nationnalite nationnalite1 = new Nationnalite();
         film.setId(id);
+        nationnalite.setId(id);
         film.setNom(nom);
         film.setAnnee(annee);
         film.setUrl(url);
