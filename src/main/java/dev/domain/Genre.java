@@ -2,6 +2,10 @@ package dev.domain;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "GENRES")
 public class Genre {
@@ -10,6 +14,15 @@ public class Genre {
     private Integer id;
     @Column(name = "LIBELLE")
     private String lib;
+
+    @ManyToMany
+    @JoinTable(
+            name = "FILMS_GENRES",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "id")
+    )
+    private Set<Film> film;
+
 
     public Genre() {
     }
