@@ -44,7 +44,10 @@ public class Film {
     @ManyToMany
     private List<Langue> langue;
 
-
+    @ManyToOne
+    @MapsId("nationnalite_id")
+    @JoinColumn(name = "nationnalite_id")
+    Nationnalite nationnalite;
 
     public Film() {
     }
