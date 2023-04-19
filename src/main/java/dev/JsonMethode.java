@@ -84,13 +84,13 @@ public class JsonMethode {
         em.close();
     }
 
-    public void addPersonne(Integer id, String nom, String prenom, String url){
+    public void addActeur(Integer id, String nom, String prenom, String url){
         System.out.println("Ajout d'une personne !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        Personne personne = new Personne();
+        Personne personne = new Acteur();
         personne.setId(id);
         personne.setNom(nom);
         personne.setPrenom(prenom);
@@ -103,13 +103,13 @@ public class JsonMethode {
         em.close();
     }
 
-    public void addActeur(Personne personne, Date dateNaiss, Adresse adresse){
+    /*public void addActeur(Personne personne, Date dateNaiss, Adresse adresse){
         System.out.println("Ajout d'un acteur !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        Acteur acteur = new Acteur();
+        Acteur acteur = new Acteur(dateNaiss);
         acteur.setDateNaiss(dateNaiss);
 
         EntityTransaction et = em.getTransaction();
@@ -117,7 +117,7 @@ public class JsonMethode {
         em.persist(acteur);
         et.commit();
         em.close();
-    }
+    }*/
 
     public void addNation(Integer id, String libelle, String url){
         System.out.println("Ajout d'une nationnalité !");
