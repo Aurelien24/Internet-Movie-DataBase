@@ -1,33 +1,24 @@
 package dev;
 
-import ch.qos.logback.core.pattern.parser.Parser;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+
+import dev.domain.Acteur;
 import dev.domain.Adresse;
 import dev.domain.Langue;
+import dev.domain.Personne;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 import static java.lang.Character.highSurrogate;
 
 
 public class AddFileJson {
     public static void main(String[] args) throws IOException {
-        //JSONObject jsonO = new JSONObject();
-        /*File file = new File("test.txt");
-
-        Reader reader = new FileReader(file);
-        BufferedReader br = new BufferedReader(reader);
-
-        String line;
-        while ((line = br.readLine()) != null) {
-            System.out.println(line);
-        }
-        br.close();*/
 
         File file = new File("test.json");
         Reader reader = new FileReader(file);
@@ -42,7 +33,7 @@ public class AddFileJson {
         String idFilm = null;
 
         boolean newPays = false;
-        String paysFilm = null;
+        String paysFilm = "null";
         String urlPaysFilm = null;
 
         String nomFilm = null;
@@ -64,7 +55,8 @@ public class AddFileJson {
         String idActeur = null;
         String nomActeur = null;
         String prenomActeur = null;
-        String dateNaissanceActeur = null;
+
+        Date dateNaissanceActeur = new Date();
         String villeNaissanceActeur = null;
         String regionNaissanceActeur = null;
         String paysNaissanceActeur = null;
@@ -115,7 +107,7 @@ public class AddFileJson {
                 System.out.println(urlPaysFilm);
 
                 // TODO ICI ARRENGEMENT A FAIRE §§
-                // jsonMethode.addPays(paysFilm, urlPaysFilm);
+                jsonMethode.addNation(paysFilm, urlPaysFilm);
             }
 
             // String nomFilm = "null";
@@ -265,11 +257,35 @@ public class AddFileJson {
                 }
             }
 
-            //String dateNaissanceActeur = null;
+            //Date dateNaissanceActeur = null;
             if (line.contains("dateNaissance : ") && newActeur && derniereLigne.contains("naissance : {")){
                 int max = line.length() -1;
-                dateNaissanceActeur =  line.substring(22, max);
-                System.out.println(dateNaissanceActeur);
+                String preDateNaissanceActeur =  line.substring(22, max);
+                String[] dateSplits = preDateNaissanceActeur.split("-");
+
+                for (String dateSplit : dateSplits){
+                    System.out.println(dateSplit);
+                }
+
+
+                SimpleDateFormat formateur2 = new SimpleDateFormat("dd/MM/yyyy");
+
+
+                int annee = Integer.parseInt(dateSplits[0]); // possible int annee;
+                annee -= 1900;
+                int mois = Integer.parseInt(dateSplits[1]);
+                int jour = Integer.parseInt(dateSplits[2]);
+
+                System.out.println("82 = " + annee);
+                System.out.println("7 = " + mois);
+                System.out.println("18 = " + jour);
+
+                Date date = new Date(annee, mois, jour);
+
+                dateNaissanceActeur = date;
+
+
+                System.out.println("MA SUPER DATE DE LA MORT QUI TUE DES POULETS CRACHEUR DE FEU DE LA MORT QUI TUE DES POULETS [...] = " + formateur2.format(dateNaissanceActeur));
             }
 
             //String villeNaissanceActeur;
@@ -295,7 +311,7 @@ public class AddFileJson {
                 }
 
                 // TODO ICI ARRENGEMENT A FAIRE §§
-                //jsonMethode.addAdresse(villeNaissanceActeur, regionNaissanceActeur, paysNaissanceActeur);
+                jsonMethode.addAdresse(villeNaissanceActeur, regionNaissanceActeur, paysNaissanceActeur);
             }
 
             //String urlActeur = null;
@@ -315,7 +331,9 @@ public class AddFileJson {
                 newActeur = false;
 
                 // TODO ICI ARRENGEMENT A FAIRE §§
-                //jsonMethode.addActeur(idActeur, nomActeur, prenomActeur, dateNaissanceActeur, urlActeur, heightActeur, roleNom);
+                Personne personne = new Acteur(nomActeur, prenomActeur, urlActeur);
+                Adresse adresse = new Adresse(villeNaissanceActeur, regionNaissanceActeur, paysNaissanceActeur);
+                jsonMethode.addActeur(personne, dateNaissanceActeur, adresse);
             }
 
             // anneeSortieFilm = null;
@@ -343,6 +361,8 @@ public class AddFileJson {
 
                 genreFilm = preGenreFilm.split(", ");
 
+                jsonMethode.addGenre(genreFilm);
+
                 for (String genreFilme : genreFilm){
                     System.out.println("pregenre " + genreFilme);
                 }
@@ -368,7 +388,7 @@ public class AddFileJson {
         System.out.println("idActeur = " + idActeur);
         System.out.println("nom acteur = " + nomActeur);
         System.out.println("prenom acteur = " + prenomActeur);
-        System.out.println("date naissence acteur = " + dateNaissanceActeur);
+        //System.out.println("date naissence acteur = " + dateNaissanceActeur);
         System.out.println("ville naissance acteur = " + villeNaissanceActeur);
         System.out.println("région naissance acteur = " + regionNaissanceActeur);
         System.out.println("pays naissance acteur = " + paysNaissanceActeur);

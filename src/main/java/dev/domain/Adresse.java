@@ -45,6 +45,9 @@ public class Adresse {
         this.pays = pays;
     }
 
+    public Adresse(String villeNaissanceActeur, String regionNaissanceActeur, String paysNaissanceActeur) {
+    }
+
     public Integer getId() {
         return id;
     }

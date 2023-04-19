@@ -36,5 +36,10 @@ public class Acteur extends Personne{
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "acteur")
     private List<Role> role = new ArrayList<>();
 
+    public Acteur(){
 
+    }
+
+    public Acteur(String nomActeur, String prenomActeur, String urlActeur) {
+    }
 }

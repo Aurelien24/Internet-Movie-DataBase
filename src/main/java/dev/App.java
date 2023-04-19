@@ -14,7 +14,6 @@ public class App {
         appMethode.cree_langue(langue);
         System.out.println("Langue crée");
 
-
         // L'utilisation de whil pourrais etre une bonne idée
         System.out.println("Voici le menu, taper 1 pour Afficher la filmographie d’un acteur donné, taper 2 pour afficher le casting d’un film, 3 pour afficher des films sortis entre 2 années données, 4 pour afficher des films communs à 2 acteurs/actrices donnés, 5 pour afficher des acteurs communs à 2 films donnés, 6 pour afficher des films sortis entre 2 années données et qui ont un acteur/actrice donné, 7 pour annuler.");
         int choix = scanner.nextInt();

@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class JsonMethode {
     public void addFilm(Integer id, Nationnalite nationnalite, String nom, String annee, String url, String desc){
+        // + Une langue, une nationnalité
         System.out.println("Ajout de film en cours !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
@@ -48,31 +49,32 @@ public class JsonMethode {
         em.close();
     }
 
-    public void addGenre(Integer id, String lib){
+    public void addGenre(String[] genres){
         System.out.println("Ajout de Genre !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        Genre genre = new Genre();
-        genre.setId(id);
-        genre.setLib(lib);
-
         EntityTransaction et = em.getTransaction();
         et.begin();
-        em.persist(genre);
+
+        for (String lib : genres){
+            Genre genre = new Genre();
+            genre.setLib(lib);
+            em.persist(genre);
+        }
+
         et.commit();
         em.close();
     }
 
-    public void addAdresse(Integer id, String etat, String pays, String ville){
+    public void addAdresse(String ville, String etat, String pays){
         System.out.println("Ajout d'adresse !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
         Adresse adresse = new Adresse();
-        adresse.setId(id);
         adresse.setEtat(etat);
         adresse.setPays(pays);
         adresse.setVille(ville);
@@ -84,49 +86,32 @@ public class JsonMethode {
         em.close();
     }
 
-    public void addActeur(Integer id, String nom, String prenom, String url){
+    public void addActeur(Personne personne, Date dateNaiss, Adresse adresse){
         System.out.println("Ajout d'une personne !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
-        Personne personne = new Acteur();
-        personne.setId(id);
-        personne.setNom(nom);
-        personne.setPrenom(prenom);
-        personne.setUrl(url);
-
-        EntityTransaction et = em.getTransaction();
-        et.begin();
-        em.persist(personne);
-        et.commit();
-        em.close();
-    }
-
-    /*public void addActeur(Personne personne, Date dateNaiss, Adresse adresse){
-        System.out.println("Ajout d'un acteur !");
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
-        System.out.println("Entity Manager Factory Fait !");
-        EntityManager em = entityManagerFactory.createEntityManager();
-
-        Acteur acteur = new Acteur(dateNaiss);
-        acteur.setDateNaiss(dateNaiss);
+        Acteur acteur = new Acteur();
+        /*acteur.setId(id);
+        acteur.setNom(nom);
+        acteur.setPrenom(prenom);
+        acteur.setUrl(url);*/
 
         EntityTransaction et = em.getTransaction();
         et.begin();
         em.persist(acteur);
         et.commit();
         em.close();
-    }*/
+    }
 
-    public void addNation(Integer id, String libelle, String url){
+    public void addNation(String libelle, String url){
         System.out.println("Ajout d'une nationnalité !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
         Nationnalite nationnalite = new Nationnalite();
-        nationnalite.setId(id);
         nationnalite.setLibN(libelle);
         nationnalite.setUrlN(url);
 
@@ -138,3 +123,4 @@ public class JsonMethode {
     }
 
 }
+
