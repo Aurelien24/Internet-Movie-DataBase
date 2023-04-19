@@ -2,6 +2,10 @@ package dev.domain;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "FILMS")
 public class Film {
@@ -18,6 +22,32 @@ public class Film {
     @Column(name = "DESCRIPTION")
     private String desc;
 
+
+
+
+
+    @ManyToMany
+    private List<Genre> genre;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "FILMS_ADRESSES",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "adresse_id", referencedColumnName = "id")
+    )
+    private Set<Adresse> adresse;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "film")
+    private List<Role> role = new ArrayList<>();
+
+    @ManyToMany
+    private List<Langue> langue;
+
+    @ManyToOne
+    @MapsId("nationnalite_id")
+    @JoinColumn(name = "nationnalite_id")
+    Nationnalite nationnalite;
 
     public Film() {
     }
