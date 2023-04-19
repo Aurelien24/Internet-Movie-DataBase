@@ -346,8 +346,6 @@ public class AddFileJson {
                 for (String genreFilme : genreFilm){
                     System.out.println("pregenre " + genreFilme);
                 }
-
-
             }
 
             derniereLigne = line;
