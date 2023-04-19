@@ -10,8 +10,7 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import static java.lang.Character.highSurrogate;
 
@@ -66,15 +65,22 @@ public class AddFileJson {
         String nomActeur = null;
         String prenomActeur = null;
         String dateNaissanceActeur = null;
-        String lieuNaissanceActeur = null;
+        String villeNaissanceActeur = null;
+        String regionNaissanceActeur = null;
+        String paysNaissanceActeur = null;
         String urlActeur = null;
         String heightActeur = null;
 
-        boolean role = false;
+        String anneeSortieFilm = null;
+
+        boolean newRole = false;
         String roleNom = null;
         // Ce sont des acteur qui sont dans role après
 
-        // Ajout de boolean pour connaitre les sous objets
+        String[] genreFilm = null;
+
+        // Ajout de jsonMethode pour avoir mes méthodes
+        JsonMethode jsonMethode = new JsonMethode();
 
         while ((line = br.readLine()) != null) {
 
@@ -107,6 +113,9 @@ public class AddFileJson {
 
                 // EST TRONQUÉ !!!
                 System.out.println(urlPaysFilm);
+
+                // TODO ICI ARRENGEMENT A FAIRE §§
+                // jsonMethode.addPays(paysFilm, urlPaysFilm);
             }
 
             // String nomFilm = "null";
@@ -136,9 +145,11 @@ public class AddFileJson {
             // String langueFilm = "null";
             if (line.contains(("langue : "))){
                 int max = line.length() -1;
-                langueFilm = line.substring(12, max);
+                langueFilm = line.substring(11, max);
 
-                System.out.println(langueFilm);
+                // TODO ICI ARRENGEMENT A FAIRE §§
+
+                //JsonMethode.addLangue(langueFilm);
             }
 
 
@@ -173,6 +184,10 @@ public class AddFileJson {
             // Désactive le lieu de tournage
             if (line.contains("},") && derniereLigne.contains("pays : ")){
                 newLieuTournage = false;
+
+                // TODO ICI ARRENGEMENT A FAIRE §§
+
+                //jsonMethode.addLieu(paysTournage, etasTournage, villeTournage);
             }
 
             // boolean newRealisateur = false;
@@ -184,11 +199,22 @@ public class AddFileJson {
             // String prenomRealisateur = null;
             if (line.contains("identite : ") && newRealisateur){
 
-                // requière un split
-
                 int max = line.length() -1;
-                nomRealisateur = line.substring(12, max);
-                prenomRealisateur = line.substring(12, max);
+
+                String identite = line.substring(15, max);
+                String[] identiteSplits = identite.split(" ");
+
+                for (String identiteSplit : identiteSplits){
+                    System.out.println(identiteSplit);
+                }
+
+                prenomRealisateur = identiteSplits[0];
+
+                if (identiteSplits.length > 2) {
+                    nomRealisateur = identiteSplits[1] + " " + identiteSplits[2];
+                } else {
+                    nomRealisateur = identiteSplits[1];
+                }
             }
 
             //String urlRealisateur = null;
@@ -199,12 +225,134 @@ public class AddFileJson {
 
             if (line.contains(" ],") && newRealisateur){
                 newRealisateur = false;
+
+                // TODO ICI ARRENGEMENT A FAIRE §§
+                // jsonMethode.addPersonne(nomRealisateur, prenomRealisateur, urlRealisateur);
+            }
+
+            //boolean newActeur = false;
+            if (line.contains("castingPrincipal : [ {")){
+                newActeur = true;
+            }
+
+            //String idActeur = null;
+            if (line.contains("id :") && newActeur){
+                int max = line.length() -1;
+                idActeur = line.substring(9, max);
+            }
+
+            //String nomActeur = null;
+            //String prenomActeur = null;
+            if (line.contains("identite : ") && newActeur){
+
+                // REQUI7RE UN SSSSSSSSSSSSSSSSSSSPPPPPPPPPPPPPPLLLLLLLLLLLLLIIIIIIIIIIIIIIIITTTTTTTTTTTTTTTTTTT
+
+                int max = line.length() -1;
+
+                String identite = line.substring(15, max);
+                String[] identiteSplits = identite.split(" ");
+
+                for (String identiteSplit : identiteSplits){
+                    System.out.println(identiteSplit);
+                }
+
+                prenomActeur = identiteSplits[0];
+
+                if (identiteSplits.length > 2) {
+                    nomActeur = identiteSplits[1] + " " + identiteSplits[2];
+                } else {
+                    nomActeur = identiteSplits[1];
+                }
+            }
+
+            //String dateNaissanceActeur = null;
+            if (line.contains("dateNaissance : ") && newActeur && derniereLigne.contains("naissance : {")){
+                int max = line.length() -1;
+                dateNaissanceActeur =  line.substring(22, max);
+                System.out.println(dateNaissanceActeur);
+            }
+
+            //String villeNaissanceActeur;
+            //String regionNaissanceActeur;
+            //String paysNaissanceActeur
+            if (line.contains("lieuNaissance :") && newActeur && derniereLigne.contains("dateNaissance : ")){
+                int max = line.length() -1;
+
+                String identite = line.substring(22, max);
+                String[] identiteSplits = identite.split(", ");
+
+                for (String identiteSplit : identiteSplits){
+                    System.out.println(identiteSplit);
+                }
+
+                villeNaissanceActeur = identiteSplits[0];
+
+                if (identiteSplits.length > 2) {
+                    regionNaissanceActeur = identiteSplits[1];
+                    paysNaissanceActeur = identiteSplits[2];
+                } else {
+                    paysNaissanceActeur = identiteSplits[1];
+                }
+
+                // TODO ICI ARRENGEMENT A FAIRE §§
+                //jsonMethode.addAdresse(villeNaissanceActeur, regionNaissanceActeur, paysNaissanceActeur);
+            }
+
+            //String urlActeur = null;
+            if (line.contains("url : /name") && newActeur){
+                int max = line.length() -1;
+                urlActeur = line.substring(10, max);
+            }
+
+            //String heightActeur = null;
+            if (line.contains("height :") && newActeur){
+                int max = line.length() -1;
+                heightActeur = line.substring(12, max);
+            }
+
+            // newActeur = false
+            if (line.contains("}, {") && newActeur && derniereLigne.contains("roles :")){
+                newActeur = false;
+
+                // TODO ICI ARRENGEMENT A FAIRE §§
+                //jsonMethode.addActeur(idActeur, nomActeur, prenomActeur, dateNaissanceActeur, urlActeur, heightActeur, roleNom);
+            }
+
+            // anneeSortieFilm = null;
+            if (line.contains("anneeSortie :")){
+                int max = line.length() -1;
+                anneeSortieFilm = line.substring(16, max);
+            }
+
+            //boolean newRole = false;
+            //if (line.contains("height :") && newActeur){
+            //    boolean newRole = true;
+            //}
+
+
+
+            if (line.contains("characterName :")) {
+                int max = line.length() -1;
+                roleNom = line.substring(20, max);
+            }
+
+
+            if (line.contains("genres : [")) {
+                int max = line.length() -1;
+                String preGenreFilm = line.substring(13, max);
+
+                genreFilm = preGenreFilm.split(", ");
+
+                for (String genreFilme : genreFilm){
+                    System.out.println("pregenre " + genreFilme);
+                }
+
+
             }
 
             derniereLigne = line;
-            System.out.println(line);
+            //System.out.println(line);
         }
-
 
         System.out.println("id filme = " + idFilm);
         System.out.println("pays filme = " + paysFilm);
@@ -212,13 +360,24 @@ public class AddFileJson {
         System.out.println("nom filme = " + nomFilm);
         System.out.println("url film = " + urlFilm);
         System.out.println("description film = " + descFilm);
+        System.out.println("langue du film = " + langueFilm);
         System.out.println("ville tournage = " + villeTournage); //  valeur null dans le json
         System.out.println("etas tournage = " + etasTournage); //  valeur null dans le json
         System.out.println("pays tournage = " + paysTournage); //  valeur null dans le json
         System.out.println("nom realisateur = " + nomRealisateur);
         System.out.println("prenom realisateur = " + prenomRealisateur);
         System.out.println("url realisateur = " + urlRealisateur);
-
+        System.out.println("idActeur = " + idActeur);
+        System.out.println("nom acteur = " + nomActeur);
+        System.out.println("prenom acteur = " + prenomActeur);
+        System.out.println("date naissence acteur = " + dateNaissanceActeur);
+        System.out.println("ville naissance acteur = " + villeNaissanceActeur);
+        System.out.println("région naissance acteur = " + regionNaissanceActeur);
+        System.out.println("pays naissance acteur = " + paysNaissanceActeur);
+        System.out.println("url acteur = " + urlActeur);
+        System.out.println("height acteur = " + heightActeur); // valeur null a chaque fois
+        System.out.println("année sortie filme = " + anneeSortieFilm); // null dans le json
+        System.out.println("role nom = " + roleNom);
 
     }
 }
