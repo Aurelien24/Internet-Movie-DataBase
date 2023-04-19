@@ -29,6 +29,8 @@ public class AppMethode {
         EntityManager em = entityManagerFactory.createEntityManager();
 
         // CODE
+        // Acteur acteur = new Acteur:
+        //acteur.setDateDeNaissence(datedenaissence);
         //em.find();
 
         EntityTransaction et = em.getTransaction();
