@@ -31,21 +31,17 @@ public class JsonMethode {
         em.close();
     }
 
-    public void addLangue(Integer id, String libelle){
-        System.out.println("Ajout de langue !");
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
-        System.out.println("Entity Manager Factory Fait !");
-        EntityManager em = entityManagerFactory.createEntityManager();
+    public static void addLangue(String libelle, EntityManager em){
 
-        Langue langue = new Langue();
-        langue.setId(id);
-        langue.setLibL(libelle);
+        Langue lg = new Langue();
+        lg.setLibL(libelle);
 
         EntityTransaction et = em.getTransaction();
         et.begin();
-        em.persist(langue);
+        em.persist(lg);
         et.commit();
-        em.close();
+
+
     }
 
     public void addGenre(Integer id, String lib){
