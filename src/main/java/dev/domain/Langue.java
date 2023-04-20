@@ -11,7 +11,7 @@ public class Langue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "LIBELLE")
+    @Column(unique= true, name = "LIBELLE")
     private String libL;
 
     @ManyToMany
