@@ -30,8 +30,8 @@ public class AppMethode {
 
         // CODE
         // Acteur acteur = new Acteur:
-        //acteur.setDateDeNaissence(datedenaissence);
-        //em.find();
+        // acteur.setDateDeNaissence(datedenaissence);
+        // em.find();
 
         EntityTransaction et = em.getTransaction();
         et.begin();

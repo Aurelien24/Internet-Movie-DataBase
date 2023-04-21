@@ -44,14 +44,13 @@ public class JsonMethode {
 
     }
 
-    public void addGenre(Integer id, String lib){
+    public void addGenre(String lib){
         System.out.println("Ajout de Genre !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
         Genre genre = new Genre();
-        genre.setId(id);
         genre.setLib(lib);
 
         EntityTransaction et = em.getTransaction();
@@ -61,14 +60,13 @@ public class JsonMethode {
         em.close();
     }
 
-    public void addAdresse(Integer id, String etat, String pays, String ville){
+    public void addAdresse(String ville, String pays, String etat){
         System.out.println("Ajout d'adresse !");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mainPersistence");
         System.out.println("Entity Manager Factory Fait !");
         EntityManager em = entityManagerFactory.createEntityManager();
 
         Adresse adresse = new Adresse();
-        adresse.setId(id);
         adresse.setEtat(etat);
         adresse.setPays(pays);
         adresse.setVille(ville);
